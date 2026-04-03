@@ -12,9 +12,29 @@ export type CloudProduct = {
   ctaLabel: LocalizedText;
 };
 
-const thoughtAmplifierUrl =
+function buildThoughtAmplifierUrl(baseUrl: string) {
+  try {
+    const url = new URL(baseUrl);
+    const normalizedPath = url.pathname.replace(/\/+$/, "");
+
+    if (!normalizedPath.endsWith("/chat")) {
+      url.pathname = `${normalizedPath}/chat`;
+    }
+
+    return url.toString();
+  } catch {
+    return baseUrl;
+  }
+}
+
+const thoughtAmplifierBaseUrl =
   process.env.NEXT_PUBLIC_THOUGHT_AMPLIFIER_URL ??
   (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "#");
+
+const thoughtAmplifierUrl =
+  thoughtAmplifierBaseUrl === "#"
+    ? thoughtAmplifierBaseUrl
+    : buildThoughtAmplifierUrl(thoughtAmplifierBaseUrl);
 
 export const cloudProducts: CloudProduct[] = [
   {
