@@ -13,7 +13,8 @@ export type CloudProduct = {
 };
 
 const thoughtAmplifierUrl =
-  process.env.NEXT_PUBLIC_THOUGHT_AMPLIFIER_URL ?? "https://example.com/thought-amplifier";
+  process.env.NEXT_PUBLIC_THOUGHT_AMPLIFIER_URL ??
+  (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "#");
 
 export const cloudProducts: CloudProduct[] = [
   {
