@@ -1,7 +1,8 @@
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { products } from "@/data/products";
+import { resolveLang } from "@/lib/i18n";
 import { getStripeClient } from "@/lib/stripe";
 
 type CheckoutBody = {
@@ -21,6 +22,8 @@ export async function POST(request: Request) {
     }
 
     const headerList = await headers();
+    const cookieStore = await cookies();
+    const lang = resolveLang(cookieStore.get("lang")?.value);
     const origin =
       process.env.NEXT_PUBLIC_SITE_URL ??
       `${headerList.get("x-forwarded-proto") ?? "http"}://${headerList.get("host")}`;
@@ -40,8 +43,8 @@ export async function POST(request: Request) {
             currency: product.currency,
             unit_amount: product.price,
             product_data: {
-              name: product.name,
-              description: product.description,
+              name: product.name[lang],
+              description: product.description[lang],
               images: [`${origin}${product.image}`],
             },
           },

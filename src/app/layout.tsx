@@ -1,23 +1,31 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+
 import { ContactButton } from "@/components/contact-button";
+import { LangToggle } from "@/components/lang-toggle";
+import { resolveLang } from "@/lib/i18n";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "\u30a2\u30d7\u30ea\u8ca9\u58f2\u6240",
-  description:
-    "Windows \u5411\u3051\u306e\u8cb7\u3044\u5207\u308a\u30a2\u30d7\u30ea\u3092\u8ca9\u58f2\u3059\u308b\u30b7\u30f3\u30d7\u30eb\u306a\u30b9\u30c8\u30a2",
+  title: "AppLab Works Store",
+  description: "A simple storefront for one-time Windows apps.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const lang = resolveLang(cookieStore.get("lang")?.value);
+
   return (
-    <html lang="ja">
+    <html lang={lang}>
       <body>
+        <LangToggle lang={lang} />
         {children}
-        <ContactButton />
+        <ContactButton lang={lang} />
       </body>
     </html>
   );

@@ -2,15 +2,17 @@ import Image from "next/image";
 
 import { PurchaseButton } from "@/components/purchase-button";
 import type { Product } from "@/data/products";
+import type { Lang } from "@/lib/i18n";
 
 type ProductCardProps = {
   product: Product;
+  lang: Lang;
 };
 
-export function ProductCard({ product }: ProductCardProps) {
-  const priceLabel = new Intl.NumberFormat("ja-JP", {
+export function ProductCard({ product, lang }: ProductCardProps) {
+  const priceLabel = new Intl.NumberFormat(lang === "ja" ? "ja-JP" : "en-US", {
     style: "currency",
-    currency: product.currency,
+    currency: product.currency.toUpperCase(),
     maximumFractionDigits: 0,
   }).format(product.price);
 
@@ -20,7 +22,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <Image
           className="product-image"
           src={product.image}
-          alt={product.name}
+          alt={product.name[lang]}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1120px) 50vw, 33vw"
           priority
@@ -28,20 +30,20 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="product-copy">
-        <h2 className="product-name">{product.name}</h2>
-        <p className="product-description">{product.description}</p>
+        <h2 className="product-name">{product.name[lang]}</h2>
+        <p className="product-description">{product.description[lang]}</p>
         <p className="product-note">
-          {
-            "\u6c7a\u6e08\u78ba\u8a8d\u5f8c 24 \u6642\u9593\u4ee5\u5185\u3092\u76ee\u5b89\u306b\u6848\u5185\u30e1\u30fc\u30eb\u3092\u304a\u9001\u308a\u3057\u307e\u3059\u3002"
-          }
+          {lang === "ja"
+            ? "決済確認後24時間以内を目安に、ダウンロード案内をメールで送ります。"
+            : "Download instructions are sent within 24 hours after payment is confirmed."}
         </p>
       </div>
 
       <div className="product-footer">
         <p className="product-price">
-          {"\u8cb7\u3044\u5207\u308a / Windows 10\u30fb11"}
+          {lang === "ja" ? "買い切り / Windows 10・11" : "One-time purchase / Windows 10-11"}
         </p>
-        <PurchaseButton productSlug={product.slug} priceLabel={priceLabel} />
+        <PurchaseButton productSlug={product.slug} priceLabel={priceLabel} lang={lang} />
       </div>
     </article>
   );

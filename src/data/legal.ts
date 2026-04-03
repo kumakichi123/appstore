@@ -1,62 +1,124 @@
-export const sellerName = "\u671d\u90e8\u8000\u5e73";
+import type { Lang } from "@/lib/i18n";
+
+type LocalizedText = Record<Lang, string>;
+
+type LegalItem = {
+  term: string;
+  description: string;
+};
+
+export const sellerName: LocalizedText = {
+  ja: "朝部耀平",
+  en: "Yohei Asabe",
+};
+
 export const contactEmail = "applabworks2026@gmail.com";
 
-export const disclosureNotice =
-  "\u4f4f\u6240\u30fb\u96fb\u8a71\u756a\u53f7\u306f\u3001\u7279\u5b9a\u5546\u53d6\u5f15\u6cd5\u306b\u57fa\u3065\u304f\u8acb\u6c42\u304c\u3042\u308c\u3070\u3001\u9045\u6ede\u306a\u304f\u958b\u793a\u3057\u307e\u3059\u3002";
+export const disclosureNotice: LocalizedText = {
+  ja: "住所・電話番号は、特定商取引法に基づく請求があれば、遅滞なく開示します。",
+  en: "Address and phone number will be disclosed promptly upon a valid request under the Act on Specified Commercial Transactions.",
+};
 
-export const supportHours =
-  "\u539f\u5247\u3068\u3057\u3066\u5e73\u65e5 10:00-18:00 \u306b\u9806\u6b21\u5bfe\u5fdc\u3057\u307e\u3059\u3002";
+export const supportHours: LocalizedText = {
+  ja: "原則として平日 10:00-18:00 に順次対応します。",
+  en: "Support inquiries are handled on weekdays between 10:00 and 18:00 JST.",
+};
 
-export const fulfillmentPolicy =
-  "\u6c7a\u6e08\u78ba\u8a8d\u5f8c 24 \u6642\u9593\u4ee5\u5185\u3092\u76ee\u5b89\u306b\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u624b\u9806\u307e\u305f\u306f\u63d0\u4f9b\u6848\u5185\u3092\u30e1\u30fc\u30eb\u3067\u3054\u9023\u7d61\u3057\u307e\u3059\u3002";
+export const fulfillmentPolicy: LocalizedText = {
+  ja: "決済確認後 24 時間以内を目安に、ダウンロード手順または提供案内をメールでご連絡します。",
+  en: "Within 24 hours after payment is confirmed, you will receive an email with download instructions or delivery details.",
+};
 
-export const refundPolicy =
-  "\u30c7\u30b8\u30bf\u30eb\u5546\u54c1\u306e\u6027\u8cea\u4e0a\u3001\u8cfc\u5165\u5f8c\u306e\u81ea\u5df1\u90fd\u5408\u306b\u3088\u308b\u8fd4\u91d1\u30fb\u30ad\u30e3\u30f3\u30bb\u30eb\u306f\u304a\u53d7\u3051\u3057\u3066\u3044\u307e\u305b\u3093\u3002\u305f\u3060\u3057\u3001\u91cd\u5927\u306a\u4e0d\u5177\u5408\u306b\u3088\u308a\u5229\u7528\u3067\u304d\u305a\u3001\u4fee\u6b63\u307e\u305f\u306f\u4ee3\u66ff\u624b\u6bb5\u3092\u63d0\u793a\u3067\u304d\u306a\u3044\u5834\u5408\u306f\u500b\u5225\u306b\u5bfe\u5fdc\u3057\u307e\u3059\u3002";
+export const refundPolicy: LocalizedText = {
+  ja: "デジタル商品の性質上、購入後の自己都合による返金・キャンセルはお受けしていません。ただし、重大な不具合により利用できず、修正または代替手段を提示できない場合は個別に対応します。",
+  en: "Because these are digital products, refunds or cancellations for customer convenience are not accepted after purchase. If a serious defect prevents use and no fix or alternative can be provided, we will review the case individually.",
+};
 
-export const paymentMethods =
-  "\u30af\u30ec\u30b8\u30c3\u30c8\u30ab\u30fc\u30c9\u6c7a\u6e08\u3001\u305d\u306e\u4ed6 Stripe Checkout \u304c\u63d0\u4f9b\u3059\u308b\u6c7a\u6e08\u624b\u6bb5";
+export const paymentMethods: LocalizedText = {
+  ja: "クレジットカード決済、その他 Stripe Checkout が提供する決済手段",
+  en: "Credit cards and other payment methods supported by Stripe Checkout.",
+};
 
-export const commercialTransactionNotes = [
-  {
-    term: "\u8ca9\u58f2\u4e8b\u696d\u8005",
-    description: sellerName,
-  },
-  {
-    term: "\u9023\u7d61\u5148\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9",
-    description: contactEmail,
-  },
-  {
-    term: "\u4f4f\u6240\u30fb\u96fb\u8a71\u756a\u53f7",
-    description: disclosureNotice,
-  },
-  {
-    term: "\u8ca9\u58f2\u4fa1\u683c",
-    description:
-      "\u5404\u5546\u54c1\u30da\u30fc\u30b8\u306b\u8868\u793a\u3057\u305f\u91d1\u984d\uff08\u6d88\u8cbb\u7a0e\u8fbc\uff09",
-  },
-  {
-    term: "\u5546\u54c1\u4ee3\u91d1\u4ee5\u5916\u306e\u5fc5\u8981\u6599\u91d1",
-    description:
-      "\u30a4\u30f3\u30bf\u30fc\u30cd\u30c3\u30c8\u63a5\u7d9a\u306b\u5fc5\u8981\u306a\u901a\u4fe1\u6599\u306f\u304a\u5ba2\u69d8\u306e\u3054\u8ca0\u62c5\u3068\u306a\u308a\u307e\u3059\u3002",
-  },
-  {
-    term: "\u652f\u6255\u6642\u671f\u30fb\u65b9\u6cd5",
-    description:
-      "\u6ce8\u6587\u6642\u306b Stripe Checkout \u3092\u901a\u3058\u3066\u304a\u652f\u6255\u3044\u3044\u305f\u3060\u304d\u307e\u3059\u3002" +
-      paymentMethods,
-  },
-  {
-    term: "\u5f15\u6e21\u6642\u671f",
-    description: fulfillmentPolicy,
-  },
-  {
-    term: "\u8fd4\u91d1\u30fb\u30ad\u30e3\u30f3\u30bb\u30eb",
-    description: refundPolicy,
-  },
-  {
-    term: "\u52d5\u4f5c\u74b0\u5883",
-    description:
-      "Windows 10 \u307e\u305f\u306f Windows 11 \u3092\u60f3\u5b9a\u3057\u3066\u3044\u307e\u3059\u3002\u5546\u54c1\u3054\u3068\u306e\u8a73\u7d30\u306f\u8ca9\u58f2\u30da\u30fc\u30b8\u3067\u3054\u78ba\u8a8d\u304f\u3060\u3055\u3044\u3002",
-  },
-];
-
+export const commercialTransactionNotes: Record<Lang, LegalItem[]> = {
+  ja: [
+    {
+      term: "販売事業者",
+      description: sellerName.ja,
+    },
+    {
+      term: "連絡先メールアドレス",
+      description: contactEmail,
+    },
+    {
+      term: "住所・電話番号",
+      description: disclosureNotice.ja,
+    },
+    {
+      term: "販売価格",
+      description: "各商品ページに表示した金額（税込）",
+    },
+    {
+      term: "商品代金以外の必要料金",
+      description: "インターネット接続に必要な通信料はお客様のご負担となります。",
+    },
+    {
+      term: "支払時期・方法",
+      description:
+        "注文時に Stripe Checkout を通じてお支払いいただきます。 " +
+        paymentMethods.ja,
+    },
+    {
+      term: "引渡時期",
+      description: fulfillmentPolicy.ja,
+    },
+    {
+      term: "返金・キャンセル",
+      description: refundPolicy.ja,
+    },
+    {
+      term: "動作環境",
+      description: "Windows 10 または Windows 11 を想定しています。商品ごとの詳細は販売ページでご確認ください。",
+    },
+  ],
+  en: [
+    {
+      term: "Seller",
+      description: sellerName.en,
+    },
+    {
+      term: "Contact email",
+      description: contactEmail,
+    },
+    {
+      term: "Address / phone number",
+      description: disclosureNotice.en,
+    },
+    {
+      term: "Price",
+      description: "The amount shown on each product page, including tax.",
+    },
+    {
+      term: "Additional costs",
+      description:
+        "Internet connection or communication costs required to use the service are the customer's responsibility.",
+    },
+    {
+      term: "Payment timing / method",
+      description:
+        "Payment is completed through Stripe Checkout at the time of order. " +
+        paymentMethods.en,
+    },
+    {
+      term: "Delivery timing",
+      description: fulfillmentPolicy.en,
+    },
+    {
+      term: "Refund / cancellation",
+      description: refundPolicy.en,
+    },
+    {
+      term: "System requirements",
+      description: "Windows 10 or Windows 11. Check each product page for details.",
+    },
+  ],
+};

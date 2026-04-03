@@ -2,19 +2,18 @@
 
 import { useState } from "react";
 
+import type { Lang } from "@/lib/i18n";
+
 type PurchaseButtonProps = {
   productSlug: string;
   priceLabel: string;
+  lang: Lang;
 };
-
-const purchaseErrorMessage =
-  "\u8cfc\u5165\u30da\u30fc\u30b8\u3092\u958b\u3051\u307e\u305b\u3093\u3067\u3057\u305f\u3002Stripe \u306e\u8a2d\u5b9a\u3092\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\u3002";
-
-const ariaLabelSuffix = "\u3067\u8cfc\u5165";
 
 export function PurchaseButton({
   productSlug,
   priceLabel,
+  lang,
 }: PurchaseButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +42,11 @@ export function PurchaseButton({
       window.location.href = url;
     } catch (error) {
       console.error(error);
-      window.alert(purchaseErrorMessage);
+      window.alert(
+        lang === "ja"
+          ? "購入ページを開けませんでした。Stripe の設定を確認してください。"
+          : "Could not open the checkout page. Check your Stripe configuration."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -55,9 +58,11 @@ export function PurchaseButton({
       className="buy-button"
       onClick={handleClick}
       disabled={isLoading}
-      aria-label={`${priceLabel}${ariaLabelSuffix}`}
+      aria-label={
+        lang === "ja" ? `${priceLabel}で購入` : `${priceLabel} purchase button`
+      }
     >
-      {isLoading ? "..." : priceLabel}
+      {isLoading ? "..." : lang === "ja" ? `${priceLabel}で購入` : `Buy ${priceLabel}`}
     </button>
   );
 }
